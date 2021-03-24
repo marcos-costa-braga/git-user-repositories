@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RepositoriosService {
-  api= environment.api+"/users/";
+  api= environment.api+"users/";
   constructor(private http: HttpClient) { }
   
   getRepositorios(username: string): Observable<any>{
