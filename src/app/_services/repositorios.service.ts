@@ -8,10 +8,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RepositoriosService {
-  api= environment.api+"users/";
   constructor(private http: HttpClient) { }
   
   getRepositorios(username: string): Observable<any>{
-    return this.http.get(this.api+username+"/repos");
+    return this.http.get(environment.api+"users/"+username+"/repos");
+  }
+  getRepositorio(username: string, repositorieName: string): Observable<any>{
+    return this.http.get(environment.api+"repos/"+username+"/"+repositorieName);
   }
 }

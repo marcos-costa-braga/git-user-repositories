@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { RepositoriosService } from '../_services/repositorios.service';
+import { UsuariosService } from '../_services/usuarios.service';
 
 @Component({
   selector: 'app-repositorios',
@@ -17,23 +18,29 @@ export class RepositoriosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'created_at', 'language', 'html_url'];
   public dataSource = new MatTableDataSource<any>();
   usuarioName: string;
+  repositorios: any;
+  usuario: any;
 
   constructor(
     private route: ActivatedRoute,
-    private repositoriosService: RepositoriosService
+    private repositoriosService: RepositoriosService,
+    private usuariosService: UsuariosService
     ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.usuarioName = String(params.get('usuarioName'));
-      console.log(this.usuarioName);
     });
-    this.Retrepositorios();
+    this.getRepositorios();
+    this.getUsuario();
   }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
-  Retrepositorios() {
-    this.repositoriosService.getRepositorios(this.usuarioName).subscribe(data => this.dataSource.data = data);
+  getUsuario() {
+    this.usuariosService.getUsuario(this.usuarioName).subscribe(data => this.usuario = data);
+  }
+  getRepositorios() {
+    this.repositoriosService.getRepositorios(this.usuarioName).subscribe(data => this.repositorios = data);
   }
 }

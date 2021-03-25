@@ -1,31 +1,19 @@
-<div class="card">
-    <div class="example-container mat-elevation-z8">
-        <div class="example-table-container">
-          <table mat-table [dataSource]="dataSource" class="table table-striped table-hover w-100" matSort
-                 matSortActive="created" matSortDisableClear matSortDirection="desc">
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-              <td mat-cell *matCellDef="let row">{{row.id}}</td>
-            </ng-container>
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Repositório</th>
-              <td mat-cell *matCellDef="let row">{{row.name}}</td>
-            </ng-container>
-            <ng-container matColumnDef="created_at">
-              <th mat-header-cell *matHeaderCellDef>Data de criação</th>
-              <td mat-cell *matCellDef="let row">{{row.created_at | date: 'short'}}</td>
-            </ng-container>
-            <ng-container matColumnDef="language">
-              <th mat-header-cell *matHeaderCellDef>Linguagem</th>
-              <td mat-cell *matCellDef="let row">{{row.language}}</td>
-            </ng-container>
-            <ng-container matColumnDef="html_url">
-              <th mat-header-cell *matHeaderCellDef>Link</th>
-              <td mat-cell *matCellDef="let row"><a href="{{row.html_url}}" target="_blank">{{row.html_url}}</a></td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </div>
+<div class="d-flex flex-md-row flex-column">
+  <div class="col-md-3 col-12">
+      <img src="{{usuario.avatar_url}}" alt="user photo">
+      <div class="d-flex flex-column">
+        <h2 class="m-0">{{usuario.name}}</h2>
+        <h4>{{usuario.login}}</h4>
       </div>
+      <p>{{usuario.bio}}</p>
+  </div>
+  <div class="d-flex col-md-9 col-12 flex-column">
+    <div class="card bg-light" *ngFor="let repositorio of repositorios">
+      <p>{{repositorio.name}}</p>
+      <label>{{repositorio.description}}</label>
+      <h4>{{repositorio.created_at | date: 'short'}}</h4>
+      <p>{{repositorio.language}}</p>
+      <p><a href="{{repositorio.html_url}}" target="_blank">{{repositorio.html_url}}</a></p>
+    </div>
+  </div>
 </div>
