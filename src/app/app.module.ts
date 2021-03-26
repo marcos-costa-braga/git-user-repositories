@@ -1,24 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RepositoriosComponent } from './repositorios/repositorios.component';
+import { DialogRepositorioComponent } from './repositorios/dialog-repositorio/dialog-repositorio.component';
+import { ErrorInterceptor, MatPaginatorIntlPtBr } from './_helpers';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuariosComponent,
-    RepositoriosComponent
+    RepositoriosComponent,
+    DialogRepositorioComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,13 @@ import { RepositoriosComponent } from './repositorios/repositorios.component';
     MatTableModule,
     MatInputModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

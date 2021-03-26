@@ -1,19 +1,36 @@
 <div class="d-flex flex-md-row flex-column">
   <div class="col-md-3 col-12">
-      <img src="{{usuario.avatar_url}}" alt="user photo">
-      <div class="d-flex flex-column">
-        <h2 class="m-0">{{usuario.name}}</h2>
-        <h4>{{usuario.login}}</h4>
+    <div class="sticky">
+      <div class="d-flex flex-md-column flex-row align-items-md-start align-items-center">
+        <div class="m-2">
+          <img src="{{usuario.avatar_url}}" alt="user photo">
+        </div>
+        <div class="d-flex flex-column m-2">
+          <h2 class="m-0">{{usuario.name}}</h2>
+          <h4>{{usuario.login}}</h4>
+        </div>
       </div>
       <p>{{usuario.bio}}</p>
+      <p *ngIf="usuario.company"><i class="material-icons">business</i>&nbsp;{{usuario.company}}</p>
+      <p *ngIf="usuario.blog"><i class="material-icons">link</i>&nbsp;<a href={{usuario.blog}}
+          target="_blank">{{usuario.blog}}</a></p>
+      <p *ngIf="usuario.location"><i class="material-icons">room</i>&nbsp;{{usuario.location}}</p>
+      <p *ngIf="usuario.email"><i class="material-icons">email</i>&nbsp;{{usuario.email}}</p>
+      <div class="d-flex flex-md-column flex-row">
+        <span>{{usuario.public_repos}} Repositorios •	&nbsp;</span>
+        <span> {{usuario.following}} Seguindo •	&nbsp;</span>
+        <span> {{usuario.followers}} Seguidores</span>
+      </div>
+    </div>
   </div>
   <div class="d-flex col-md-9 col-12 flex-column">
-    <div class="card bg-light" *ngFor="let repositorio of repositorios">
-      <p>{{repositorio.name}}</p>
-      <label>{{repositorio.description}}</label>
-      <h4>{{repositorio.created_at | date: 'short'}}</h4>
-      <p>{{repositorio.language}}</p>
-      <p><a href="{{repositorio.html_url}}" target="_blank">{{repositorio.html_url}}</a></p>
+    <div id="repositorio" class="card m-1 p-1" *ngFor="let repositorio of repositorios"
+      (click)="openDialog(repositorio.name)">
+      <h2 class="m-0">{{repositorio.name}}</h2>
+      <label class="mb-2">{{repositorio.description}}</label>
+      <p class="mb-0">Data Atualização: {{repositorio.updated_at | date: 'dd/MM/yyyy, HH:mm:ss'}}</p>
+      <p>Data Criação: {{repositorio.created_at | date: 'dd/MM/yyyy, HH:mm:ss'}}</p>
+      <p *ngIf="repositorio.language">Linguagem: {{repositorio.language}}</p>
     </div>
   </div>
 </div>

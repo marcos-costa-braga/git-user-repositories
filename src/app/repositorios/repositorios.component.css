@@ -2,3 +2,26 @@ img{
     border-radius: 50%;
     width: 150px;
 }
+.material-icons{
+    font-size: 18px;
+}
+#repositorio{
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+#repositorio:hover{
+    background-color: #f8f9faaa;
+}
+@media (min-width: 768px){
+    .sticky {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+    }
+}
+a{
+    color: black
+}
+span{
+    white-space: nowrap;
+}

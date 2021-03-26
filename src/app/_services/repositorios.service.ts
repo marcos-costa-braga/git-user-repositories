@@ -10,10 +10,10 @@ import { environment } from 'src/environments/environment';
 export class RepositoriosService {
   constructor(private http: HttpClient) { }
   
-  getRepositorios(username: string): Observable<any>{
-    return this.http.get(environment.api+"users/"+username+"/repos");
+  getRepositorios(usuarioName: string): Observable<any>{
+    return this.http.get(environment.api+"users/"+usuarioName+"/repos");
   }
-  getRepositorio(username: string, repositorieName: string): Observable<any>{
-    return this.http.get(environment.api+"repos/"+username+"/"+repositorieName);
+  getRepositorio(usuarioName: string, repositorieName: string): Observable<any>{
+    return this.http.get(environment.api+"repos/"+usuarioName+"/"+repositorieName);
   }
 }
