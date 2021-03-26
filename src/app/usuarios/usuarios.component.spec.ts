@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { UsuariosComponent } from './usuarios.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UsuariosComponent', () => {
   let component: UsuariosComponent;
@@ -12,7 +13,7 @@ describe('UsuariosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientTestingModule, RouterTestingModule ],
       declarations: [ UsuariosComponent ]
     })
     .compileComponents();
