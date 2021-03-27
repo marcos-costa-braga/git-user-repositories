@@ -1,28 +1,43 @@
-<div class="card">
-    <div class="example-container mat-elevation-z8">
-        <div class="example-table-container">
-          <table mat-table [dataSource]="dataSource" class="table table-striped table-hover w-100" matSort
-                 matSortActive="created" matSortDisableClear matSortDirection="desc">
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-              <td mat-cell *matCellDef="let row">{{row.id}}</td>
-            </ng-container>
-            <ng-container matColumnDef="login">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
-              <td mat-cell *matCellDef="let row">{{row.login}}</td>
-            </ng-container>
-            <ng-container matColumnDef="avatar_url">
-              <th mat-header-cell *matHeaderCellDef>Avatar</th>
-              <td mat-cell *matCellDef="let row"><img src="{{row.avatar_url}}"></td>
-            </ng-container>
-            <ng-container matColumnDef="html_url">
-              <th mat-header-cell *matHeaderCellDef>Ir para página</th>
-              <td mat-cell *matCellDef="let row"><a href="{{row.html_url}}" target="_blank">{{row.html_url}}</a></td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            routerLink="{{row.login}}/repositorios"></tr>
-          </table>
-        </div>
-      </div>
+<div class="container">
+  <div class="card align-items-center">
+    <h1>Lista de Usuários</h1>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar usuário</mat-label>
+        <input matInput type="text" [(ngModel)]="userName">
+      </mat-form-field>
+      <button class="btn btn-primary mb-3" (click)="onSubmit()">
+        <i class="material-icons">search</i>
+      </button>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="table table-striped table-hover w-100" matSort
+      matSortActive="created" matSortDisableClear matSortDirection="desc">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="login">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
+        <td mat-cell *matCellDef="let row">{{row.login}}</td>
+      </ng-container>
+      <ng-container matColumnDef="avatar_url">
+        <th mat-header-cell *matHeaderCellDef>Avatar</th>
+        <td mat-cell *matCellDef="let row"><img src="{{row.avatar_url}}"></td>
+      </ng-container>
+      <ng-container matColumnDef="html_url">
+        <th mat-header-cell *matHeaderCellDef>Ir para página</th>
+        <td mat-cell *matCellDef="let row"><a href="{{row.html_url}}" target="_blank">{{row.html_url}}</a></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="{{row.login}}/repositorios"></tr>
+    </table>
+    <!-- <div>
+      <button class="btn btn-lg btn-success btn-block" [disabled]="submitted">
+        <span *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>
+        Ver mais
+      </button>
+    </div> -->
+    <!-- <input class="m-3" (click)="getUsuarios(nextSince)" type="button" value="Ver mais" /> -->
+    <a class="m-3" (click)="getUsuarios(nextSince)">Ver mais</a>
+  </div>
 </div>

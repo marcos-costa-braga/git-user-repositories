@@ -2,3 +2,10 @@ img {
     border-radius: 50%;
     width: 50px;
 }
+a{
+    color: black;
+    cursor: pointer;
+}
+tr{
+    cursor: pointer !important;
+}
