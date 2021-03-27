@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { RepositoriosService } from '../_services/repositorios.service';
@@ -24,10 +25,12 @@ export class RepositoriosComponent implements OnInit, AfterViewInit {
   usuario: any = {};
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private repositoriosService: RepositoriosService,
     private usuariosService: UsuariosService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -41,10 +44,19 @@ export class RepositoriosComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   getUsuario() {
-    this.usuariosService.getUsuario(this.usuarioName).subscribe(data => this.usuario = data);
+    this.usuariosService.getUsuario(this.usuarioName).subscribe(
+      data => this.usuario = data,
+      () => {
+        this.snackBar.open('Usuário não encontrado', null, {
+          duration: 2000,
+          panelClass: ['text-white', 'font-weight-bold']
+        });
+        this.router.navigate(['/usuarios'])
+      }
+    );
   }
   getRepositorios() {
-    this.repositoriosService.getRepositorios(this.usuarioName).subscribe(data => this.repositorios = data);
+    this.repositoriosService.getRepositorios(this.usuarioName).subscribe(data => this.repositorios = data, err => this.router.navigate(['/usuarios']));
   }
   openDialog(repositorioName) {
     this.dialog.open(DialogRepositorioComponent, {
@@ -54,6 +66,11 @@ export class RepositoriosComponent implements OnInit, AfterViewInit {
         usuarioName: this.usuarioName
       }
     })
+  }
+  changeUser(usuarioName){
+    this.usuarioName = usuarioName;
+    this.getRepositorios();
+    this.getUsuario();
   }
   ngOnDestroy(): void {
     this.dialog.closeAll();
