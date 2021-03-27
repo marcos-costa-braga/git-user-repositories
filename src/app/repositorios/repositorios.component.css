@@ -5,12 +5,17 @@ img{
 .material-icons{
     font-size: 18px;
 }
-#repositorio{
-    background-color: #f8f9fa;
+#repositorio {
+    background-color: #fff;
+    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
     cursor: pointer;
+    margin-bottom: 10px;
+    box-shadow: 1.5px 1.25px 3px #aaa;
 }
-#repositorio:hover{
-    background-color: #f8f9faaa;
+
+#repositorio:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 2.5px 6px #aaa;
 }
 @media (min-width: 768px){
     .sticky {
