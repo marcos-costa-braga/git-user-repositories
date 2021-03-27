@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 export class UsuariosService {
   constructor(private http: HttpClient) { }
 
-  getUsuarios(since, per_page): Observable<any>{
-    return this.http.get(environment.api+'users?since='+since+'&per_page='+per_page , {observe: 'response'});
+  getUsuarios(since): Observable<any>{
+    return this.http.get(environment.api+'users?since='+since+'&per_page=25' , {observe: 'response'});
   }
   getUsuario(usuarioName: string): Observable<any>{
     return this.http.get(environment.api+'users/'+usuarioName);
